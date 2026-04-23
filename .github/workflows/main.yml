@@ -9,6 +9,10 @@ jobs:
   bash-hello-job:
     name: Say Hello World with Bash  # This is what shows up in the UI
     runs-on: ubuntu-latest
+    env:
+      # This ensures the secret is available to your scripts
+      ACTIONS_STEP_DEBUG: ${{ secrets.ACTIONS_STEP_DEBUG }}  
+    
     steps:
       - name: echo Step
         run: echo "Hello World from a named Bash step!"
@@ -16,6 +20,10 @@ jobs:
   python-hello-job:
     name: Say Hello World with Python
     runs-on: ubuntu-latest
+    env:
+      # This ensures the secret is available to your scripts
+      ACTIONS_STEP_DEBUG: ${{ secrets.ACTIONS_STEP_DEBUG }}
+      
     steps:
       - name: print Step
         run: python3 -c "print('Hello from a named Python step!')"
@@ -23,6 +31,11 @@ jobs:
   docker-build-job:
     name: Build and Run Dockerfile
     runs-on: ubuntu-latest
+
+    env:
+      # This ensures the secret is available to your scripts
+      ACTIONS_STEP_DEBUG: ${{ secrets.ACTIONS_STEP_DEBUG }}
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
