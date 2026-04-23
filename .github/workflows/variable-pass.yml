@@ -14,7 +14,13 @@ jobs:
       - id: persist_step
         name: Create and Export Variable
         run: |
-          HELLOWORLD="Secret-Message-123"
+          # say 'Hello World"
+          echo "hello world"
+
+          # set the variable
+          HELLOWORLD="Secret- inlMessage-123"
+
+          # expose the var has an output
           echo "my_var=$HELLOWORLD" >> $GITHUB_OUTPUT
 
   python-hello-job:
