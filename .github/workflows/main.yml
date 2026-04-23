@@ -1,16 +1,34 @@
-name: Docker Test
+name: Manual Docker Test
 
-on: [push] # This triggers the test every time you save code
+on: 
+  push:                # Runs automatically on code change
+  workflow_dispatch:   # Adds the manual "Run workflow" button
 
 jobs:
-  build-and-run:
+  # This is the 'ID' of the job
+  bash-hello-job:
+    name: Say Hello with Bash  # This is what shows up in the UI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greeting Step
+        run: echo "Hello from a named Bash step!"
+
+  python-hello-job:
+    name: Say Hello with Python
+    runs-on: ubuntu-latest
+    steps:
+      - name: Printing Step
+        run: python3 -c "print('Hello from a named Python step!')"
+
+  docker-build-job:
+    name: Build and Run Dockerfile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build the Docker image
-        run: docker build -t my-hello-app .
+      - name: Build Image
+        run: docker build -t my-app .
 
-      - name: Run the container
-        run: docker run my-hello-app
+      - name: Run Container
+        run: docker run my-app
