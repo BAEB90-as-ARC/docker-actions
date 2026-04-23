@@ -1,0 +1,27 @@
+name: Pass Variable
+
+on: 
+  workflow_dispatch: # This ensures it only runs when you click the button
+
+jobs:
+  bash-hello-job:
+    name: Generate Variable in Bash
+    runs-on: ubuntu-latest
+    outputs:
+      passed_val: ${{ steps.persist_step.outputs.my_var }}
+    
+    steps:
+      - id: persist_step
+        name: Create and Export Variable
+        run: |
+          HELLOWORLD="Secret-Message-123"
+          echo "my_var=$HELLOWORLD" >> $GITHUB_OUTPUT
+
+  python-hello-job:
+    name: Receive Variable in Python
+    runs-on: ubuntu-latest
+    needs: bash-hello-job
+    steps:
+      - name: Use the variable
+        run: |
+          python3 -c "print('Python received: ${{ needs.bash-hello-job.outputs.passed_val }}')"
