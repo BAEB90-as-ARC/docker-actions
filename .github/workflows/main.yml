@@ -1,4 +1,4 @@
-name: Manual Docker Test
+name: Hello World Test
 
 on: 
   push:                # Runs automatically on code change
@@ -7,17 +7,17 @@ on:
 jobs:
   # This is the 'ID' of the job
   bash-hello-job:
-    name: Say Hello with Bash  # This is what shows up in the UI
+    name: Say Hello World with Bash  # This is what shows up in the UI
     runs-on: ubuntu-latest
     steps:
-      - name: Greeting Step
-        run: echo "Hello from a named Bash step!"
+      - name: echo Step
+        run: echo "Hello World from a named Bash step!"
 
   python-hello-job:
-    name: Say Hello with Python
+    name: Say Hello World with Python
     runs-on: ubuntu-latest
     steps:
-      - name: Printing Step
+      - name: print Step
         run: python3 -c "print('Hello from a named Python step!')"
 
   docker-build-job:
